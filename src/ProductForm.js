@@ -19,7 +19,11 @@ class ProductForm extends Component {
         const name = target.name
     
         this.setState((prevState) => {
-            prevState.product[name] = value
+            if (name === "instock") {
+              prevState.product[name] = target.checked
+            } else {
+              prevState.product[name] = value
+            }
             return { product: prevState.product }
         })
     }
@@ -53,7 +57,7 @@ class ProductForm extends Component {
                 </p>
                 <p>
                     <label>In Stock?<br /> 
-                    <input type="checkbox" class="form-check-input" name="instock" onChange={this.handleChange} value={this.state.product.instock} /></label>
+                    <input type="checkbox" class="form-control" name="instock" onChange={this.handleChange} value={this.state.product.instock} /></label>
                 </p>
                 <input type="submit" class="btn btn-info" value="Save" onClick={this.handleSave}></input>
             </form>
